@@ -29,21 +29,9 @@ parser.add_argument('-d', '--description')
 
 options = parser.parse_args()
 
-if options.name:
-    re_name = re.compile(options.name)
-else:
-    re_name = re.compile('.*')
-
-if options.target:
-    re_target = re.compile(options.target)
-else:
-    re_target = re.compile('.*')
-
-if options.check:
-    re_check = re.compile(options.check)
-else:
-    re_check = re.compile('.*')
-
+re_name = re.compile(options.name) if options.name else re.compile('.*')
+re_target = re.compile(options.target) if options.target else re.compile('.*')
+re_check = re.compile(options.check) if options.check else re.compile('.*')
 if options.description:
     re_description = re.compile(options.description)
 else:

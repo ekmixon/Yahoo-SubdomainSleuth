@@ -13,9 +13,7 @@ import json
 
 
 def value(obj, field):
-    if field in obj:
-        return obj[field]
-    return ''
+    return obj[field] if field in obj else ''
 
 parser = argparse.ArgumentParser(description='Get list of records in DSNDB by supplying domains in a JSON file.')
 parser.add_argument("-l", "--logging", type=str, default="error",
@@ -31,9 +29,7 @@ print(args)
 output = csv.writer(sys.stdout)
 
 # Output the header line
-fields = []
-for f in args.field:
-    fields.append(f)
+fields = list(args.field)
 output.writerow(fields)
 
 
@@ -42,7 +38,5 @@ for input in args.input:
     js = json.load(input)
 
     for item in js:
-        fields = []
-        for f in args.field:
-            fields.append(value(item, f))
+        fields = [value(item, f) for f in args.field]
         output.writerow(fields)
