@@ -33,13 +33,13 @@ lcount = options.labels * -1
 for result in input:
     if result['check'] != 'cname':
         continue
-    
+
     labels = result[options.field].rstrip('.').split('.')
     short_name = '.'.join(labels[lcount:])
-    
+
     if short_name not in counts:
         counts[short_name] = 0
-    
+
     counts[short_name] += 1
 
 # Print the counts and labels, sorted by count
